@@ -1,19 +1,22 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, request
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
-app = Flask(__name__)
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    return render_template('contact.html')
-
-@app.route('/donor', methods=['GET', 'POST'])
-def donor():
-    return render_template('donor.html')
+db = SQLAlchemy()    
+migrate = Migrate()
 
 
-@app.route('/receiver', methods=['GET'])
-def receiver():
-    return render_template('receiver.html') 
+
+def create_app():
+    app = Flask(__name__, template_folder='templates', static_folder='static')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app) 
+    migrate.init_app(app, db)
+
+    from models import Donor
+    from routes import register_routes
+    register_routes(app,db)
+
+
+    return app
