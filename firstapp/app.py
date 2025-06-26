@@ -1,9 +1,15 @@
+import os
 import time
 from flask import Flask,session,flash,url_for,redirect
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, UserMixin, current_user, logout_user, login_user
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 
 db = SQLAlchemy()    
 migrate = Migrate()
@@ -13,7 +19,7 @@ def create_app():
     app = Flask(__name__, template_folder='templates', static_folder='static')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.config['SECRET_KEY'] = 'NEERAJ_PEPSU'
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     db.init_app(app) 
     migrate.init_app(app, db)
     bcrypt = Bcrypt(app)
