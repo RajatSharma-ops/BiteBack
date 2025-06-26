@@ -15,7 +15,7 @@ RUN pip install -r requirements.txt
 
 # Copy project files
 COPY . .
-copy .env .env
+COPY .env .env
 
 # Expose the port Flask will run on
 EXPOSE 5000
