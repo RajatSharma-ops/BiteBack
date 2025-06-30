@@ -21,4 +21,4 @@ COPY .env .env
 EXPOSE 5000
 
 # Run the application
-CMD ["python", "run.py"]
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]

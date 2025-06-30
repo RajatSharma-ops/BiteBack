@@ -36,6 +36,10 @@ def create_app():
     register_routes(app,db)
     SESSION_TIMEOUT = 600
 
+    with app.app_context():
+        db.create_all()
+        print("✅ Tables created or already existed.")
+
     @app.before_request
     def auto_logout():
         if current_user.is_authenticated:
@@ -53,3 +57,6 @@ def create_app():
             session['last_activity'] = now
    
     return app
+
+
+app = create_app()

@@ -1,0 +1,11 @@
+services:
+  biteback:
+    build: ./firstapp
+    container_name: biteback-container
+    ports:
+      - "5050:5000"
+    volumes:
+      - ./firstapp/instance:/app/firstapp/instance
+    env_file:
+      - ./firstapp/.env
+    restart: unless-stopped
