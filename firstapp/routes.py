@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,flash,url_for,session
 from flask_bcrypt import Bcrypt
 from flask_login import login_user, logout_user,current_user,login_required
-from models import Donor,User
-from app import db 
+from firstapp.models import Donor,User
+from firstapp.app import db 
 import time
 
 

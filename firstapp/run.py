@@ -1,5 +1,5 @@
-from app import create_app,db
-from models import Donor
+from firstapp.app import create_app,db
+from firstapp.models import Donor
 
 flask_app = create_app()
 app = flask_app

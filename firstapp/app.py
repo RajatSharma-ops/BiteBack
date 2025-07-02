@@ -26,13 +26,13 @@ def create_app():
     loginManager = LoginManager(app)
     loginManager.login_view = 'login'  # Redirect here if user not logged in
 
-    from models import User
+    from firstapp.models import User
     @loginManager.user_loader
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    from models import Donor
-    from routes import register_routes
+    from firstapp.models import Donor
+    from firstapp.routes import register_routes
     register_routes(app,db)
     SESSION_TIMEOUT = 600
 
