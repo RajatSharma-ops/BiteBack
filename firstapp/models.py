@@ -1,4 +1,4 @@
-from app import db
+from firstapp.app import db
 from flask_login import UserMixin
 
 class Donor(db.Model):
